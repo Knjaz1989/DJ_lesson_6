@@ -1,0 +1,161 @@
+
+
+# создание продукта
+POST http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{
+  "title": "Апельсин",
+  "description": "Привезли из заграницы"
+}
+
+###
+
+# создание продукта
+POST http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{
+  "title": "Мандарин",
+  "description": "Вкусное угощение к новогоднему столу"
+}
+
+###
+
+# создание продукта
+POST http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{
+  "title": "Гранат",
+  "description": "Полезен для организма"
+}
+
+###
+
+# создание продукта
+POST http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+{
+  "title": "Огурец",
+  "description": "Очень полезен"
+}
+
+###
+# получение продуктов
+GET http://localhost:8000/api/v1/products/
+Content-Type: application/json
+
+
+###
+
+# обновление продукта
+PATCH http://localhost:8000/api/v1/products/1/
+Content-Type: application/json
+
+{
+  "description": "Круглый и оранжевый"
+}
+
+###
+
+# удаление продукта
+DELETE http://localhost:8000/api/v1/products/4/
+Content-Type: application/json
+
+###
+
+# поиск продуктов по названию и описанию
+GET http://localhost:8000/api/v1/products/?search=гранат
+Content-Type: application/json
+
+###
+
+# создание склада
+POST http://localhost:8000/api/v1/stocks/
+Content-Type: application/json
+
+{
+  "address": "ул. Промышленная",
+  "positions": [
+    {
+      "product": 2,
+      "quantity": 250,
+      "price": 120.50
+    },
+    {
+      "product": 3,
+      "quantity": 100,
+      "price": 180
+    }
+  ]
+}
+
+###
+
+# создание склада
+POST http://localhost:8000/api/v1/stocks/
+Content-Type: application/json
+
+{
+  "address": "ул. Колхозная",
+  "positions": [
+    {
+      "product": 1,
+      "quantity": 85,
+      "price": 70.50
+    }
+  ]
+}
+
+
+###
+
+# создание склада
+POST http://localhost:8000/api/v1/stocks/
+Content-Type: application/json
+
+{
+  "address": "ул. Дзгоева",
+  "positions": []
+}
+
+###
+
+# список всех складов
+GET http://localhost:8000/api/v1/stocks/
+Content-Type: application/json
+
+###
+
+# показать конкретный склад
+GET http://localhost:8000/api/v1/stocks/1/
+Content-Type: application/json
+
+###
+# обновляем записи на складе
+PATCH http://localhost:8000/api/v1/stocks/9/
+Content-Type: application/json
+
+{
+  "address": "ул. Мотористов",
+  "positions": [
+    {
+      "product": 1,
+      "quantity": 60,
+      "price": 110
+    },
+    {
+      "product": 3,
+      "quantity": 154,
+      "price": 200
+    }
+  ]
+}
+
+###
+
+# поиск складов, где есть определенный продукт
+GET http://localhost:8000/api/v1/stocks/?products=ман
+Content-Type: application/json

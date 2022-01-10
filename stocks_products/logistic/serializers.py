@@ -18,14 +18,14 @@ class ProductPositionSerializer(serializers.ModelSerializer):
 
 
 class StockSerializer(serializers.ModelSerializer):
-    positions = ProductPositionSerializer(many=True)
+    positions = ProductPositionSerializer(many=True, default=[])
 
     class Meta:
         model = Stock
         fields = ['id', 'address', 'positions', 'products']
 
 
-    # настройте сериализатор для склада
+        # настройте сериализатор для склада
 
     def create(self, validated_data):
         # достаем связанные данные для других таблиц
@@ -46,7 +46,7 @@ class StockSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         # достаем связанные данные для других таблиц
-        positions = validated_data.pop('positions')
+        positions = validated_data.get('positions', [])
 
         # обновляем склад по его параметрам
         stock = super().update(instance, validated_data)
@@ -55,7 +55,15 @@ class StockSerializer(serializers.ModelSerializer):
         # в нашем случае: таблицу StockProduct
         # с помощью списка positions
         for product in positions:
-            StockProduct.objects.filter(stock_id=stock.id,
-                                        product_id=product['product'].id,).update(quantity=product['quantity'],
-                                                                                  price=product['price'])
+            stock_product_list = StockProduct.objects.filter(stock=stock.id, product=product['product'])
+            if stock_product_list:
+                stock_product = stock_product_list[0]
+                stock_product.quantity = product['quantity']
+                stock_product.price = product['price']
+                stock_product.save()
+            else:
+                StockProduct.objects.create(stock_id=stock.id,
+                                            product_id=product['product'].id,
+                                            quantity=product['quantity'],
+                                            price=product['price'])
         return stock

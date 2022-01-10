@@ -117,11 +117,28 @@ POST http://localhost:8000/api/v1/stocks/
 Content-Type: application/json
 
 {
-  "address": "ул. Дзгоева",
-  "positions": []
+  "address": "ул. Пролетарская"
 }
 
 ###
+
+# Создрание склада
+POST http://localhost:8000/api/v1/stocks/
+Content-Type: application/json
+
+{
+  "address": "ул. Заводская",
+  "positions": [
+    {
+      "product": 1,
+      "quantity": 85,
+      "price": 70.50
+    }
+  ]
+}
+
+###
+
 
 # список всех складов
 GET http://localhost:8000/api/v1/stocks/
@@ -135,11 +152,10 @@ Content-Type: application/json
 
 ###
 # обновляем записи на складе
-PATCH http://localhost:8000/api/v1/stocks/9/
+PATCH http://localhost:8000/api/v1/stocks/4/
 Content-Type: application/json
 
 {
-  "address": "ул. Мотористов",
   "positions": [
     {
       "product": 1,
@@ -147,11 +163,22 @@ Content-Type: application/json
       "price": 110
     },
     {
-      "product": 3,
+      "product": 2,
       "quantity": 154,
       "price": 200
     }
   ]
+}
+
+###
+
+###
+# обновляем название склада
+PATCH http://localhost:8000/api/v1/stocks/4/
+Content-Type: application/json
+
+{
+  "address": "ул. Маяковского"
 }
 
 ###

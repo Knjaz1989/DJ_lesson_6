@@ -152,20 +152,15 @@ Content-Type: application/json
 
 ###
 # обновляем записи на складе
-PATCH http://localhost:8000/api/v1/stocks/4/
+PATCH http://localhost:8000/api/v1/stocks/6/
 Content-Type: application/json
 
 {
   "positions": [
     {
-      "product": 1,
-      "quantity": 60,
-      "price": 110
-    },
-    {
-      "product": 2,
-      "quantity": 154,
-      "price": 200
+      "product": 3,
+      "quantity": 180,
+      "price": 12
     }
   ]
 }
@@ -174,11 +169,11 @@ Content-Type: application/json
 
 ###
 # обновляем название склада
-PATCH http://localhost:8000/api/v1/stocks/4/
+PATCH http://localhost:8000/api/v1/stocks/6/
 Content-Type: application/json
 
 {
-  "address": "ул. Маяковского"
+  "address": "ул. Машковцева"
 }
 
 ###
